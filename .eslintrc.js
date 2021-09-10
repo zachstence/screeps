@@ -19,7 +19,7 @@ module.exports = {
     "@typescript-eslint",
     "simple-import-sort"
   ],
-  ignorePatterns: [".eslintrc.js", "jest.config.js", "commitlint.config.js"],
+  ignorePatterns: [".eslintrc.js", "jest.config.js", "ormconfig.js", "scripts/*", "built.js"],
   rules: {
     // Configure import sorting since eslint sort-imports doesn't autofix
     "simple-import-sort/imports": "error",
@@ -41,7 +41,7 @@ module.exports = {
     "no-await-in-loop": "off",                                                 /* (  ) disallow `await` inside of loops */
     "no-compare-neg-zero": "error",                                            /* (r ) disallow comparing against -0 */
     "no-cond-assign": "error",                                                 /* (r ) disallow assignment operators in conditional expressions */
-    "no-console": "error",                                                     /* (r ) disallow the use of `console` */
+    "no-console": "off",                                                       /* (r ) disallow the use of `console` */
     "no-constant-condition": "error",                                          /* (r ) disallow constant expressions in conditions */
     "no-control-regex": "error",                                               /* (r ) disallow control characters in regular expressions */
     "no-debugger": "error",                                                    /* (r ) disallow the use of `debugger` */
@@ -177,7 +177,7 @@ module.exports = {
     "no-restricted-globals": "off",                                            /* (  ) disallow specified global variables */
     "no-shadow": "off",                                                        /* (  ) disallow variable declarations from shadowing variables declared in the outer scope */ // Disabled in favor of typescript-eslint rule below
     "no-shadow-restricted-names": "error",                                     /* (r ) disallow identifiers from shadowing restricted names */
-    "no-undef": "error",                                                       /* (r ) disallow the use of undeclared variables unless mentioned in `global` comments */
+    "no-undef": "off",                                                         /* (r ) disallow the use of undeclared variables unless mentioned in `global` comments */
     "no-undef-init": "error",                                                  /* ( f) disallow initializing variables to `undefined` */
     "no-undefined": "off",                                                     /* (  ) disallow the use of `undefined` as an identifier */
     "no-unused-vars": "off",                                                   /* (r ) disallow unused variables */ // Disabled in favor of typescript-eslint rule below
@@ -396,11 +396,11 @@ module.exports = {
     "@typescript-eslint/consistent-type-imports": ["error", {                  /* ( f ) Enforces consistent usage of type imports */
       "prefer": "type-imports"
     }],
-    "@typescript-eslint/explicit-function-return-type": "error",               /* (  ) Require explicit return types on functions and class methods */
+    "@typescript-eslint/explicit-function-return-type": "off",               /* (  ) Require explicit return types on functions and class methods */
     "@typescript-eslint/explicit-member-accessibility": ["error", {            /* ( f ) Require explicit accessibility modifiers on class properties and methods */
       "accessibility": "no-public"
     }],
-    "@typescript-eslint/explicit-module-boundary-types": "error",              /* (r  ) Require explicit return and argument types on exported functions' and classes' public class methods */
+    "@typescript-eslint/explicit-module-boundary-types": "off",                /* (r  ) Require explicit return and argument types on exported functions' and classes' public class methods */
     "@typescript-eslint/member-delimiter-style": ["error", {                   /* ( f ) Require a specific member delimiter style for interfaces and type literals */
       "multiline": {
         "delimiter": "semi",
@@ -419,7 +419,7 @@ module.exports = {
     "@typescript-eslint/no-confusing-void-expression": "error",                /* ( ft) Requires expressions of type void to appear in statement position */
     "@typescript-eslint/no-dynamic-delete": "error",                           /* ( f ) Disallow the delete operator with computed key expressions */
     "@typescript-eslint/no-empty-interface": "error",                          /* (rf ) Disallow the declaration of empty interfaces */
-    "@typescript-eslint/no-explicit-any": "error",                             /* (rf ) Disallow usage of the any type */
+    "@typescript-eslint/no-explicit-any": "off",                               /* (rf ) Disallow usage of the any type */
     "@typescript-eslint/no-extra-non-null-assertion": "error",                 /* (rf ) Disallow extra non-null assertion */
     "@typescript-eslint/no-extraneous-class": ["error", {                      /* (   ) Forbids the use of classes as namespaces */
       "allowEmpty": true
@@ -444,11 +444,11 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-type-arguments": "off",                 /* ( ft) Enforces that type arguments will not be used if not required */
     "@typescript-eslint/no-unnecessary-type-assertion": "error",               /* (rft) Warns if a type assertion does not change the type of an expression */
     "@typescript-eslint/no-unnecessary-type-constraint": "error",              /* ( f ) Disallows unnecessary constraints on generic types */
-    "@typescript-eslint/no-unsafe-argument": "error",                          /* (  t) Disallows calling an function with an any type value */
-    "@typescript-eslint/no-unsafe-assignment": "error",                        /* (r t) Disallows assigning any to variables and properties */
-    "@typescript-eslint/no-unsafe-call": "error",                              /* (r t) Disallows calling an any type value */
+    "@typescript-eslint/no-unsafe-argument": "off",                            /* (  t) Disallows calling an function with an any type value */
+    "@typescript-eslint/no-unsafe-assignment": "off",                          /* (r t) Disallows assigning any to variables and properties */
+    "@typescript-eslint/no-unsafe-call": "off",                                /* (r t) Disallows calling an any type value */
     "@typescript-eslint/no-unsafe-member-access": "off",                       /* (r t) Disallows member access on any typed variables */
-    "@typescript-eslint/no-unsafe-return": "error",                            /* (r t) Disallows returning any from a function */
+    "@typescript-eslint/no-unsafe-return": "off",                              /* (r t) Disallows returning any from a function */
     "@typescript-eslint/no-var-requires": "error",                             /* (r  ) Disallows the use of require statements except in import statements */
     "@typescript-eslint/non-nullable-type-assertion-style": "error",           /* ( ft) Prefers a non-null assertion over explicit type cast when possible */
     "@typescript-eslint/prefer-as-const": "error",                             /* (rf ) Prefer usage of as const over literal type */
@@ -531,13 +531,18 @@ module.exports = {
     "@typescript-eslint/no-dupe-class-members": "error",                       /* (   ) Disallow duplicate class members */
     "@typescript-eslint/no-duplicate-imports": "error",                        /* (   ) Disallow duplicate imports */
     "@typescript-eslint/no-empty-function": "off",                             /* (r  ) Disallow empty functions */
-    "@typescript-eslint/no-extra-parens": "error",                             /* ( f ) Disallow unnecessary parentheses */
+    "@typescript-eslint/no-extra-parens": "off",                               /* ( f ) Disallow unnecessary parentheses */
     "@typescript-eslint/no-extra-semi": "error",                               /* (rf ) Disallow unnecessary semicolons */
     "@typescript-eslint/no-implied-eval": "error",                             /* (r t) Disallow the use of eval()-like methods */
     "@typescript-eslint/no-invalid-this": "error",                             /* (   ) Disallow this keywords outside of classes or class-like objects */
     "@typescript-eslint/no-loop-func": "error",                                /* (   ) Disallow function declarations that contain unsafe references inside loop statements */
     "@typescript-eslint/no-loss-of-precision": "error",                        /* (   ) Disallow literal numbers that lose precision */
-    "@typescript-eslint/no-magic-numbers": "off",                              /* (   ) Disallow magic numbers */
+    "@typescript-eslint/no-magic-numbers": ["off", {                           /* (   ) Disallow magic numbers */
+      "ignoreDefaultValues": true,
+      "ignoreArrayIndexes": true,
+      "enforceConst": true,
+      "ignore": [0, 1, -1]
+    }],
     "@typescript-eslint/no-redeclare": "error",                                /* (   ) Disallow variable redeclaration */
     "@typescript-eslint/no-shadow": "error",                                   /* (   ) Disallow variable declarations from shadowing variables declared in the outer scope */
     "@typescript-eslint/no-throw-literal": "error",                            /* (  t) Disallow throwing literals as exceptions */
