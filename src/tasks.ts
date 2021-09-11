@@ -49,7 +49,7 @@ const getEnergy: TaskFunction = (creep: Creep): void => {
     const sources = creep.room.find(FIND_SOURCES);
     if (!sources.length) {
         console.error(`${creep.name} perform task ${Task.GetEnergy} because no energy sources exist in the room ${creep.room.name}`);
-        creep.memory.task = "";
+        creep.memory.task = Task.NoTask;
         return;
     }
     const ret = creep.harvest(sources[0]);
@@ -95,7 +95,7 @@ const upgradeController: TaskFunction = (creep: Creep): void => {
     const controller = creep.room.controller;
     if (!controller) {
         console.error(`${creep.name} unable to perform task ${Task.UpgradeController} because no controller exists in the room ${creep.room.name}`);
-        creep.memory.task = "";
+        creep.memory.task = Task.NoTask;
         return;
     }
 

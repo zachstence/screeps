@@ -8,23 +8,28 @@ export interface CreepPrototype {
     tasks: Task[];
 }
 
+export enum CreepPrototypeBaseName {
+    BaseCreep = "BaseCreep",
+    Builder = "Builder",
+}
+
 export const BaseCreep: CreepPrototype = {
-    baseName: "BaseCreep",
+    baseName: CreepPrototypeBaseName.BaseCreep,
     body: [WORK, CARRY, MOVE],
     opts: {
         memory: {
-            prototypeBaseName: "BaseCreep",
+            prototypeBaseName: CreepPrototypeBaseName.BaseCreep,
         },
     },
     tasks: [Task.NoTask, Task.GetEnergy, Task.TransferEnergyToSpawn, Task.UpgradeController],
 };
 
 export const Builder: CreepPrototype = {
-    baseName: "Builder",
+    baseName: CreepPrototypeBaseName.Builder,
     body: [WORK, CARRY, MOVE],
     opts: {
         memory: {
-            prototypeBaseName: "Builder",
+            prototypeBaseName: CreepPrototypeBaseName.Builder,
         },
     },
     tasks: [Task.NoTask, Task.GetEnergy, Task.Build],
