@@ -38,7 +38,7 @@ export const listTasks = () => {
 };
 
 export const spawnCreep = (spawn: StructureSpawn, prototype: CreepPrototype): ScreepsReturnCode => {
-    const name = `${prototype.namePrefix} ${Game.time}`;
+    const name = `${prototype.namePrefix}${Game.time}`;
     return spawn.spawnCreep(prototype.body, name, prototype.opts);
 };
 
