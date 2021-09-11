@@ -1,14 +1,18 @@
 import typescript from "@rollup/plugin-typescript";
-import {terser} from "rollup-plugin-terser";
+import {execSync} from "child_process";
+
+import config from "./config.json";
+
+const branchName = execSync("git rev-parse --abbrev-ref HEAD").toString();
+if (!branchName) throw new Error("Could not determine current git branch name");
 
 export default {
     input: "src/index.ts",
     output: {
-        file: "/mnt/c/Users/zachs/AppData/Local/Screeps/scripts/***REMOVED***/main/main.js",
+        file: `${config.deployDirectory}/${branchName}/main.js`,
         format: "cjs",
     },
     plugins: [
         typescript(),
-        // terser(),
     ],
 };
