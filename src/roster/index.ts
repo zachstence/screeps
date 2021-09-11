@@ -1,5 +1,5 @@
 import type {CreepPrototype} from "./prototypes";
-import {BaseCreep} from "./prototypes";
+import {BaseCreep, Builder} from "./prototypes";
 
 export interface RosterRole {
     prototype: CreepPrototype;
@@ -7,7 +7,8 @@ export interface RosterRole {
 }
 
 export const roster: RosterRole[] = [
-    {prototype: BaseCreep, count: 14},
+    {prototype: BaseCreep, count: 4},
+    {prototype: Builder, count: 10},
 ];
 
 export const countCreepsWithPrototype = (prototype: CreepPrototype): number => {

@@ -22,6 +22,7 @@ export const listTasks = () => {
         GetEnergy: 0,
         TransferEnergyToSpawn: 0,
         UpgradeController: 0,
+        Build: 0,
     };
 
     for (const creep of Object.values(Game.creeps)) {

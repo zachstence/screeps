@@ -17,8 +17,7 @@ export function loop() {
     // Spawn creeps to fill roster
     for (const role of roster) {
         const neededCreeps = role.count - countCreepsWithPrototype(role.prototype);
-        if (neededCreeps) {
-            console.log(neededCreeps);
+        if (neededCreeps > 0) {
             spawnCreep(spawn1, role.prototype);
         }
     }
