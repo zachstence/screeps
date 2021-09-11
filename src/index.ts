@@ -1,7 +1,10 @@
-import listJobs from "./listJobs";
-import harvester from "./roles/harvester";
-import {Job} from "./roles/types";
-import upgrader from "./roles/upgrader";
+import harvester from "./jobs/harvester";
+import {Job} from "./jobs/types";
+import upgrader from "./jobs/upgrader";
+import {HarvesterPrototype, UpgraderPrototype} from "./prototypes";
+import {
+    deallocCreeps, listJobs, spawnCreep, spawnStatus,
+} from "./util";
 
 const SPAWN_NAME = "Spawn1";
 const LISTCREEPS_TICKS = 10;
@@ -9,41 +12,22 @@ const UPGRADERS_PER_HARVESTER = 3;
 
 export function loop() {
 
-    // Delete dead creeps from memory
-    for (const name in Memory.creeps) {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        if (!Game.creeps[name]) {
-            // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-            delete Memory.creeps[name];
-            console.log("Clearing stale creep memory:", name);
-        }
-    }
+    const spawn1 = Game.spawns[SPAWN_NAME];
 
+    deallocCreeps();
     if (Game.time % LISTCREEPS_TICKS === 0) listJobs();
 
-    const numHarvesters = Object.values(Game.creeps).filter(creep => creep.memory.job === Job.Harvester).length;
-    const numUpgraders = Object.values(Game.creeps).filter(creep => creep.memory.job === Job.Upgrader).length;
-
-    if (!Game.spawns[SPAWN_NAME].spawning) { // Spawn either a harvester or upgrader to keep given ratio
+    // Spawn either a harvester or upgrader to keep given ratio
+    if (!spawn1.spawning) {
+        const numHarvesters = Object.values(Game.creeps).filter(creep => creep.memory.job === Job.Harvester).length;
+        const numUpgraders = Object.values(Game.creeps).filter(creep => creep.memory.job === Job.Upgrader).length;
+    
         const needHarvester = numUpgraders / numHarvesters > UPGRADERS_PER_HARVESTER;
-        const newName = `${needHarvester ? "Harvester" : "Upgrader"} ${Game.time}`;
-        const spawnReturnCode = Game.spawns[SPAWN_NAME].spawnCreep([WORK, CARRY, MOVE], newName, {
-            memory: {
-                job: needHarvester ? Job.Harvester : Job.Upgrader,
-            },
-        });
-
-        if (spawnReturnCode === 0) console.log(`Spawning ${newName}`);
-    } else { // Show status of spawn when spawning creep
-        const spawningCreep = Game.creeps[Game.spawns[SPAWN_NAME].spawning!.name];
-        Game.spawns[SPAWN_NAME].room.visual.text(
-            `Spawning ${spawningCreep.memory.job}...`,
-            Game.spawns[SPAWN_NAME].pos.x + 1,
-            Game.spawns[SPAWN_NAME].pos.y,
-            {align: "left", opacity: 0.8},
-        );
+        const ret = spawnCreep(spawn1, needHarvester ? HarvesterPrototype : UpgraderPrototype);
+        if (ret === 0) console.log(`Spawning`);
     }
 
+    spawnStatus(spawn1);
 
     // Do jobs
     for (const creep of Object.values(Game.creeps)) {
