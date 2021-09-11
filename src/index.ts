@@ -7,7 +7,7 @@ import {
 const SPAWN_NAME = "Spawn1";
 const LISTCREEPS_TICKS = 10;
 
-const NUM_CREEPS = 12;
+const NUM_CREEPS = 14;
 
 export function loop() {
 
