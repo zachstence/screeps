@@ -1,17 +1,19 @@
-import {Task} from "./tasks";
+import {Task} from "../tasks";
 
 export interface CreepPrototype {
-    namePrefix: string;
+    baseName: string;
     body: BodyPartConstant[];
     opts?: SpawnOptions;
 }
 
 export const BaseCreep: CreepPrototype = {
-    namePrefix: "BaseCreep",
+    baseName: "BaseCreep",
     body: [WORK, CARRY, MOVE],
     opts: {
         memory: {
+            prototypeBaseName: "BaseCreep",
             task: Task.NoTask,
         },
     },
 };
+

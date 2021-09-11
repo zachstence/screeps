@@ -1,4 +1,4 @@
-import type {CreepPrototype} from "./prototypes";
+import type {CreepPrototype} from "./roster/prototypes";
 import type {Task} from "./tasks";
 
 /**
@@ -38,7 +38,7 @@ export const listTasks = () => {
 };
 
 export const spawnCreep = (spawn: StructureSpawn, prototype: CreepPrototype): ScreepsReturnCode => {
-    const name = `${prototype.namePrefix}${Game.time}`;
+    const name = `${prototype.baseName}${Game.time}`;
     return spawn.spawnCreep(prototype.body, name, prototype.opts);
 };
 
