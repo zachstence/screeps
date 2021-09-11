@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -cw",
+    "deploy": "rollup -c",
+    "deploy:watch": "rollup -cw",
     "lint": "eslint --fix src/*.ts"
   },
   "keywords": [],
