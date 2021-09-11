@@ -1,4 +1,5 @@
 import type {CreepPrototype} from "./prototypes";
+import type {Task} from "./tasks";
 
 /**
  * Removes any creeps from the Game that do not exist in Memory (due to creep death).
@@ -15,19 +16,22 @@ export const deallocCreeps = (doLog = false) => {
     }
 };
 
-export const listJobs = () => {
-    // TODO make this use Job
-    const jobCounts: Record<string, number> = {};
+export const listTasks = () => {
+    const taskCounts: { [key in Task]: number} = {
+        NoTask: 0,
+        GetEnergy: 0,
+        TransferEnergyToSpawn: 0,
+        UpgradeController: 0,
+    };
 
     for (const creep of Object.values(Game.creeps)) {
-        const job = creep.memory.job;
-        if (jobCounts[job] >= 0) jobCounts[job]++;
-        else jobCounts[job] = 0;
+        const task = creep.memory.task as Task;
+        taskCounts[task]++;
     }
 
-    let out: string = "Employed creeps:\n";
-    out += Object.entries(jobCounts)
-        .map(entry => `  ${entry[0]}\t${entry[1]}`)
+    let out: string = "";
+    out += Object.entries(taskCounts)
+        .map(entry => `${entry[1].toString().padStart(2)}\t${entry[0]}`)
         .join("\n");
 
     console.log(out);
@@ -40,9 +44,8 @@ export const spawnCreep = (spawn: StructureSpawn, prototype: CreepPrototype): Sc
 
 export const spawnStatus = (spawn: StructureSpawn): void => {
     if (spawn.spawning) {
-        const spawningCreep = Game.creeps[spawn.spawning.name];
         spawn.room.visual.text(
-            `Spawning ${spawningCreep.memory.job}...`,
+            `Spawning...`,
             spawn.pos.x + 1,
             spawn.pos.y,
             {align: "left", opacity: 0.8},
