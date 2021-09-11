@@ -5,7 +5,7 @@ import upgrader from "./roles/upgrader";
 
 const SPAWN_NAME = "Spawn1";
 const LISTCREEPS_TICKS = 10;
-const UPGRADERS_PER_HARVESTER = 2;
+const UPGRADERS_PER_HARVESTER = 3;
 
 export function loop() {
 
