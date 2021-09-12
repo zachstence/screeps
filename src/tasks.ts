@@ -121,7 +121,8 @@ const upgradeController: TaskFunction = (creep: Creep): void => {
 const build: TaskFunction = (creep: Creep): void => {
     const target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
     if (!target) {
-        console.log(`${creep.name} unable to perform task ${Task.Build} because there are no construction sites in need of building`);
+        // console.log(`${creep.name} unable to perform task ${Task.Build} because there are no construction sites in need of building`);
+        creep.moveTo(16, 20);
         return;
     }
 

@@ -1,5 +1,5 @@
 import type {CreepPrototype} from "./roster/prototypes";
-import type {Task} from "./tasks";
+import {Task} from "./tasks";
 
 /**
  * Removes any creeps from the Game that do not exist in Memory (due to creep death).
@@ -26,7 +26,7 @@ export const listTasks = () => {
     };
 
     for (const creep of Object.values(Game.creeps)) {
-        const task = creep.memory.task as Task;
+        const task = creep.memory.task ?? Task.NoTask;
         taskCounts[task]++;
     }
 

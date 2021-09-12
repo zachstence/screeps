@@ -7,8 +7,8 @@ export interface RosterRole {
 }
 
 export const roster: RosterRole[] = [
-    {prototype: BaseCreep, count: 4},
-    {prototype: Builder, count: 10},
+    {prototype: BaseCreep, count: 14},
+    {prototype: Builder, count: 1},
 ];
 
 export const countCreepsWithPrototype = (prototype: CreepPrototype): number => {
